@@ -12,7 +12,14 @@
         @foreach($montadoras as $montadora)
         <tr>
             <td>{{ $montadora->nome }}</td>
-            <td></td>
+            <td><a href="{{ route('montadora.edit', ['id' => $montadora->id]) }}">Editar</a>
+                <br>
+                <form action="{{ route('montadora.destroy', ['id' => $montadora->id]) }}" method="post">Deletar
+                    @method('delete')
+                    @csrf
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
         </tr>
         @endforeach
     </table>
