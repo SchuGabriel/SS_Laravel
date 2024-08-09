@@ -2,7 +2,7 @@
 @section('pageTitle', "Novo Modelo")
 @section("content")
 <div class="container">
-    <h1>Nova Modelo</h1>
+    <h1>Novo Modelo</h1>
     <a href="{{ route('modelo.index') }}">Voltar</a>
     @if($modelo->id)
     <form action="{{ route('modelo.update', ['id'=>$modelo->id]) }}" method="post" enctype="multipart/form-data">
@@ -12,10 +12,10 @@
             @endif
             @csrf
 
-            <select name="id_montadora" id="id_montadora">
+            <select name="montadora_id" id="montadora_id">
                 @foreach($montadoras as $montadora)
                 <option value="{{ $montadora->id }}"
-                    {{ $montadora->id == $modelo->id_montadora ? 'selected': '' }}
+                    {{ $montadora->id == $modelo->montadora_id ? 'selected': '' }}
                 >{{ $montadora->nome }}</option>
                 @endforeach
             </select>
