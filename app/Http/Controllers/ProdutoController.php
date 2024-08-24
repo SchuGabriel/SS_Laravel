@@ -24,11 +24,13 @@ class ProdutoController extends Controller
         $produto = new Produto();
         $cod_similar = new Cod_Similar();
         $grupos = Grupo::all();
+        $grupo_id = null;
 
         return view('produto', [
             'produto' => $produto,
             'cod_similar' => $cod_similar,
             'grupos' => $grupos,
+            'grupo_id' => $grupo_id,
         ]);
     }
 

@@ -30,15 +30,19 @@
             <label for="cod_similar">Cod Similar (separados por vírgulas):</label>
             <input type="text" name="cod_similar" id="cod_similar" value="{{ $produto->cod_similar->pluck('nome')->implode(',') }}">
 
-            <select name="grupo_id" id="grupo_id">
+            <select class="js-example-basic-multiple" name="grupo_id[]" id="grupo_id" multiple="multiple">
                 @foreach ($grupos as $grupo)
-                <option value="{{ $grupo->id }}" 
-                    {{ $grupo_id == $grupo->id ? 'selected' : '' }}
-                    >{{ $grupo->nome }}</option>
+                <option value="{{ $grupo->id }}"
+                    {{ $grupo_id == $grupo->id ? 'selected' : '' }}>{{ $grupo->nome }}</option>
                 @endforeach
             </select>
 
             <button type="submit">Salvar</button>
         </form>
 </div>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
 @endsection
