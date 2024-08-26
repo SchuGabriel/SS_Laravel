@@ -14,7 +14,7 @@
             <td>{{ $motor->nome }}</td>
             <td><a href="{{ route('motor.edit', ['id' => $motor->id]) }}">Editar</a>
                 <br>
-                <form action="{{ route('motor.destroy', ['id' => $motor->id]) }}" method="post">Deletar
+                <form action="{{ route('motor.destroy', ['id' => $motor->id]) }}" method="post">
                     @method('delete')
                     @csrf
                     <button type="submit">Excluir</button>

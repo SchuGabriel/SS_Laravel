@@ -14,7 +14,7 @@
             <td>{{ $grupo->nome }}</td>
             <td><a href="{{ route('grupo.edit', ['id' => $grupo->id]) }}">Editar</a>
                 <br>
-                <form action="{{ route('grupo.destroy', ['id' => $grupo->id]) }}" method="post">Deletar
+                <form action="{{ route('grupo.destroy', ['id' => $grupo->id]) }}" method="post">
                     @method('delete')
                     @csrf
                     <button type="submit">Excluir</button>

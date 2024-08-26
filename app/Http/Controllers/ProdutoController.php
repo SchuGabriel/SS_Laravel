@@ -36,18 +36,16 @@ class ProdutoController extends Controller
 
     public function store(Request $request)
     {
-        #Criacao do Produto
+        // Criação do Produto
         $produto = new Produto();
-
         $produto->referencia = $request->input('referencia');
         $produto->nome = $request->input('nome');
         $produto->observacao = $request->input('observacao');
         $produto->quant_carro = $request->input('quant_carro');
         $produto->multiplo = $request->input('multiplo');
-
         $produto->save();
 
-        # Criacao do Cod Similar
+        // Criação do Cod Similar
         $cod_similares = $request->input('cod_similar');
         $cod_similares_array = array_map('trim', explode(',', $cod_similares)); // Remove espaços em branco
 
@@ -60,8 +58,14 @@ class ProdutoController extends Controller
             }
         }
 
+        // Verifica se grupo_id é um array
+        $grupo_ids = $request->input('grupo_id', []);
+        if (!is_array($grupo_ids)) {
+            $grupo_ids = [$grupo_ids];
+        }
+
         $grupo = new Grupo_Produto();
-        $grupo->grupo_id = $request->input('grupo_id');
+        $grupo->grupo_id = $grupo_ids[0]; // Usando o primeiro valor se for um array
         $grupo->produto_id = $produto->id;
         $grupo->save();
 
@@ -130,13 +134,16 @@ class ProdutoController extends Controller
             Cod_Similar::find($id)->delete();
         }
 
+        // Verifica se grupo_id é um array
         $gruposSelecionados = $request->input('grupo_id', []);
+        if (!is_array($gruposSelecionados)) {
+            $gruposSelecionados = [$gruposSelecionados];
+        }
+
         $produto->grupo()->sync($gruposSelecionados);
 
         return redirect()->route('produto.index');
     }
-
-
 
     public function destroy($id)
     {
@@ -145,14 +152,14 @@ class ProdutoController extends Controller
         if ($produto) {
             // Deleta todos os registros na tabela intermediária grupo_produto
             $produto->grupo()->detach();
-    
+
             // Deleta todos os códigos similares associados
             $produto->cod_similar()->delete();
-    
+
             // Finalmente, deleta o produto
             $produto->delete();
         }
-    
+
         return redirect()->route('produto.index');
     }
 }

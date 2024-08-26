@@ -14,7 +14,7 @@
             <td>{{ $montadora->nome }}</td>
             <td><a href="{{ route('montadora.edit', ['id' => $montadora->id]) }}">Editar</a>
                 <br>
-                <form action="{{ route('montadora.destroy', ['id' => $montadora->id]) }}" method="post">Deletar
+                <form action="{{ route('montadora.destroy', ['id' => $montadora->id]) }}" method="post">
                     @method('delete')
                     @csrf
                     <button type="submit">Excluir</button>

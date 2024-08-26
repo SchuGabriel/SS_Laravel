@@ -14,6 +14,7 @@
 <header class="cabecalho">
     <nav class="menu">
         <ul class="colunas">
+            <li><a href="{{ asset('/') }}" class="lista">Home</a></li>
         </ul>
     </nav>
 </header>
