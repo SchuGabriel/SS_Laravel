@@ -7,10 +7,9 @@
 <div class="container">
     <h1>Bem vindo</h1>
     <ul class="link-list">
-        <li><a href="{{ route('produto.index') }}">Produtos</a></li>
-        <li><a href="{{ route('montadora.index') }}">Montadora</a></li>
-        <li><a href="{{ route('modelo.index') }}">Modelo</a></li>
-        <li><a href="{{ route('grupo.index') }}">Grupo</a></li>
+        <li><a href="">Pesquisar</a></li>
+        <li><a href="{{ route('home.cadastro') }}">Cadastro</a></li>
+        <li><a href="{{ route('home.conferencia') }}">Conferencia</a></li>
     </ul>
 </div>
 @endsection

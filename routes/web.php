@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AplicacaoController;
+use App\Http\Controllers\ConferenciaController;
 use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModeloContoller;
 use App\Http\Controllers\MontadoraController;
 use App\Http\Controllers\MotorController;
@@ -8,9 +11,9 @@ use App\Http\Controllers\PosicaoController;
 use App\Http\Controllers\ProdutoController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+# Homes
+Route::get('/', [HomeController::class, 'home'])->name('home.index');
+Route::get('/cadastro', [HomeController::class, 'cadastro'])->name('home.cadastro');
 
 Route::prefix('montadora')->group(function(){
 
@@ -77,3 +80,18 @@ Route::prefix('produto')->group(function(){
     Route::delete('{id}', [ProdutoController::class, 'destroy'])->name('produto.destroy');
 
 });
+
+Route::prefix('aplicacao')->group(function() {
+
+    Route::get('/', [AplicacaoController::class, 'index'])->name('aplicacao.index');
+    Route::post('', [AplicacaoController::class, 'search'])->name('aplicacao.search');
+    Route::post('/store', [AplicacaoController::class, 'store'])->name('aplicacao.store');
+
+});
+
+Route::prefix('conferencia')->group(function() {
+
+    Route::get('/', [ConferenciaController::class, 'index'])->name('home.conferencia');
+
+});
+
