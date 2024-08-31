@@ -92,6 +92,8 @@ Route::prefix('aplicacao')->group(function() {
 Route::prefix('conferencia')->group(function() {
 
     Route::get('/', [ConferenciaController::class, 'index'])->name('home.conferencia');
+    Route::get('/entrada', [ConferenciaController::class, 'entrada'])->name('conferencia.entrada');
+    Route::get('/saida', [ConferenciaController::class, 'saida'])->name('conferencia.saida');
 
 });
 

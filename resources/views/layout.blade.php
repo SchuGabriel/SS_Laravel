@@ -16,6 +16,8 @@
         <ul class="colunas">
             @yield("voltar")
             <li><a href="{{ asset('/') }}" class="lista">Home</a></li>
+            <li><a href="{{ route('home.cadastro') }}" class="lista">Cadastro</a></li>
+            <li><a href="{{ route('home.conferencia') }}" class="lista">Conferencia</a></li>
         </ul>
     </nav>
 </header>
