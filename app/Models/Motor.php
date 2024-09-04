@@ -10,4 +10,7 @@ class Motor extends Model
     use HasFactory;
     protected $table = 'Motor';
 
+    public function aplicacoes(){
+        return $this->belongsToMany(Aplicacao::class, 'aplicacao_motor', 'motor_id', 'aplicacao_id');
+    }
 }

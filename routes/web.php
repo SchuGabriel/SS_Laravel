@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModeloContoller;
 use App\Http\Controllers\MontadoraController;
 use App\Http\Controllers\MotorController;
+use App\Http\Controllers\PesquisarController;
 use App\Http\Controllers\PosicaoController;
 use App\Http\Controllers\ProdutoController;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +87,13 @@ Route::prefix('aplicacao')->group(function() {
     Route::get('/', [AplicacaoController::class, 'index'])->name('aplicacao.index');
     Route::post('', [AplicacaoController::class, 'search'])->name('aplicacao.search');
     Route::post('/store', [AplicacaoController::class, 'store'])->name('aplicacao.store');
+
+});
+
+Route::prefix('pesquisar')->group(function() {
+
+    Route::get('/', [PesquisarController::class, 'index'])->name('home.pesquisar');
+    Route::post('', [PesquisarController::class, 'search'])->name('pesquisar.search');
 
 });
 

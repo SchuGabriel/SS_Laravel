@@ -7,7 +7,7 @@
 <div class="container">
     <h1>Bem vindo</h1>
     <ul class="link-list">
-        <li><a href="">Pesquisar</a></li>
+        <li><a href="{{ route('home.pesquisar') }}">Pesquisar</a></li>
         <li><a href="{{ route('home.cadastro') }}">Cadastro</a></li>
         <li><a href="{{ route('home.conferencia') }}">Conferencia</a></li>
     </ul>

@@ -10,4 +10,7 @@ class Posicao extends Model
     use HasFactory;
     protected $table = 'Posicao';
 
+    public function aplicacao(){
+        return $this->hasMany(Aplicacao::class);
+    }
 }

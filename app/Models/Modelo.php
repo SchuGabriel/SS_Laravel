@@ -14,4 +14,8 @@ class Modelo extends Model
     public function montadora(){
         return $this->belongsTo(Montadora::class);
     }
+    
+    public function aplicacoes(){
+        return $this->belongsToMany(Aplicacao::class, 'aplicacao_modelo', 'modelo_id', 'aplicacao_id');
+    }
 }
