@@ -8,7 +8,7 @@
 
         <div>
             <label for="lbl_nome">Referencia:</label>
-            <input type="text" id="referencia">
+            <input type="text" id="referencia" name="referencia">
         </div>
 
         <div>
@@ -40,7 +40,7 @@
 
         <div>
             <label for="lbl_Ano">Ano:</label>
-            <input type="text" id="ano">
+            <input type="text" id="ano" name="ano">
         </div>
 
         <div>

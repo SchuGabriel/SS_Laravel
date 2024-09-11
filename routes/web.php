@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AplicacaoController;
+use App\Http\Controllers\ChatGptController;
 use App\Http\Controllers\ConferenciaController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IAController;
 use App\Http\Controllers\ModeloContoller;
 use App\Http\Controllers\MontadoraController;
 use App\Http\Controllers\MotorController;
@@ -102,6 +104,13 @@ Route::prefix('conferencia')->group(function() {
     Route::get('/', [ConferenciaController::class, 'index'])->name('home.conferencia');
     Route::get('/entrada', [ConferenciaController::class, 'entrada'])->name('conferencia.entrada');
     Route::get('/saida', [ConferenciaController::class, 'saida'])->name('conferencia.saida');
+
+})
+;
+Route::prefix('ia')->group(function() {
+
+    Route::get('/', [IAController::class, 'index'])->name('home.ia');
+    Route::get('/chatgpt', [ChatGptController::class, 'getResponse'])->name('chat.send');
 
 });
 
