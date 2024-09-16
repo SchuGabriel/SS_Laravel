@@ -94,9 +94,13 @@ class PesquisarController extends Controller
             );
         }
 
-        $aplicacao = $sql->get();
+        $aplicacoes = $sql->get();
 
         #dd($sql->toSql());
-        dd($aplicacao);
+        #dd($aplicacao);
+
+        foreach($aplicacoes as $aplicacao){
+            
+        }
     }
 }
