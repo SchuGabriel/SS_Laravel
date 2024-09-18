@@ -98,30 +98,33 @@ class PesquisarController extends Controller
         $sql->groupBy('aplicacao.produto_id');
 
         $produtos_id = $sql->pluck('aplicacao.produto_id'); #Nao retorna como json
-        
+
         $produtos = Produto::whereIn('id', $produtos_id)->get();
-        
-        
-        foreach($produtos as $produto){
-            
-            $aplicacoes = DB::table('aplicacao')
-                             ->select('aplicacao.*')
-                             ->where('produto_id', '=', $produto->id)
-                             ->get();
 
-            $produtos->aplicacoes = $aplicacoes;
 
-            foreach($produto->aplicacoes as $aplicacao){
-                $modelos = DB::table('aplicacao_modelo')
-                                ->select('modelo.nome')
-                                ->join('modelo', 'modelo.id', '=', 'aplicacao_modelo.modelo_id', 'inner')
-                                ->where('aplicacao.id', '=', $produtos->aplicacoes->id)
-                                ->get();
+        foreach ($produtos as $produto) {
 
-                # TERMINAR AQUI
+            $produto->aplicacoes = DB::table('aplicacao')
+                ->select('aplicacao.*')
+                ->where('produto_id', '=', $produto->id)
+                ->get();
+
+            foreach ($produto->aplicacoes as $aplicacao) {
+                $aplicacao->modelos = DB::table('aplicacao_modelo')
+                    ->select('modelo.nome')
+                    ->join('modelo', 'modelo.id', '=', 'aplicacao_modelo.modelo_id', 'inner')
+                    ->where('aplicacao_modelo.aplicacao_id', '=', $aplicacao->id)
+                    ->get();
+
+
+                $aplicacao->motores = DB::table('aplicacao_motor')
+                    ->select('motor.nome')
+                    ->join('motor', 'motor.id', '=', 'aplicacao_motor.motor_id')
+                    ->where('aplicacao_motor.aplicacao_id', '=', $aplicacao->id)
+                    ->get();
             }
-        }
 
-        dd($produtos);
+            dd($produto);
+        }
     }
 }
