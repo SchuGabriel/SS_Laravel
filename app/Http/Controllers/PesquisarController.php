@@ -6,6 +6,7 @@ use App\Models\Grupo;
 use App\Models\Modelo;
 use App\Models\Motor;
 use App\Models\Posicao;
+use App\Models\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,7 +36,7 @@ class PesquisarController extends Controller
         $sql = null;
 
         $sql = DB::table('aplicacao')
-            ->select('aplicacao.*');
+            ->select('aplicacao.produto_id');
 
         if (!is_null($request->input('referencia'))) {
             $join_produto = true;
@@ -94,13 +95,33 @@ class PesquisarController extends Controller
             );
         }
 
-        $aplicacoes = $sql->get();
+        $sql->groupBy('aplicacao.produto_id');
 
-        #dd($sql->toSql());
-        #dd($aplicacao);
-
-        foreach($aplicacoes as $aplicacao){
+        $produtos_id = $sql->pluck('aplicacao.produto_id'); #Nao retorna como json
+        
+        $produtos = Produto::whereIn('id', $produtos_id)->get();
+        
+        
+        foreach($produtos as $produto){
             
+            $aplicacoes = DB::table('aplicacao')
+                             ->select('aplicacao.*')
+                             ->where('produto_id', '=', $produto->id)
+                             ->get();
+
+            $produtos->aplicacoes = $aplicacoes;
+
+            foreach($produto->aplicacoes as $aplicacao){
+                $modelos = DB::table('aplicacao_modelo')
+                                ->select('modelo.nome')
+                                ->join('modelo', 'modelo.id', '=', 'aplicacao_modelo.modelo_id', 'inner')
+                                ->where('aplicacao.id', '=', $produtos->aplicacoes->id)
+                                ->get();
+
+                # TERMINAR AQUI
+            }
         }
+
+        dd($produtos);
     }
 }
