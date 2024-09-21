@@ -7,8 +7,10 @@ use App\Models\Modelo;
 use App\Models\Motor;
 use App\Models\Posicao;
 use App\Models\Produto;
+use DeepCopy\Filter\ReplaceFilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 use function PHPUnit\Framework\isNull;
 
@@ -21,17 +23,25 @@ class PesquisarController extends Controller
         $grupos = Grupo::all();
         $motores = Motor::all();
         $posicoes = Posicao::all();
+        $produtos = [];
 
         return view('pesquisar', [
             'grupos' => $grupos,
             'motores' => $motores,
             'posicoes' => $posicoes,
             'modelos' => $modelos,
+            'produtos' => $produtos,
         ]);
     }
 
     public function search(Request $request)
     {
+
+        $modelos = Modelo::all();
+        $grupos = Grupo::all();
+        $motores = Motor::all();
+        $posicoes = Posicao::all();
+
         $join_produto = false;
         $sql = null;
 
@@ -97,34 +107,42 @@ class PesquisarController extends Controller
 
         $sql->groupBy('aplicacao.produto_id');
 
-        $produtos_id = $sql->pluck('aplicacao.produto_id'); #Nao retorna como json
+        #dd($sql->toSql());
+        #$produtos_id = $sql->pluck('aplicacao.produto_id'); #Nao retorna como json
 
-        $produtos = Produto::whereIn('id', $produtos_id)->get();
-
+        $produtos = Produto::whereIn('id', $sql->pluck('aplicacao.produto_id'))->get();
 
         foreach ($produtos as $produto) {
 
             $produto->aplicacoes = DB::table('aplicacao')
-                ->select('aplicacao.*')
-                ->where('produto_id', '=', $produto->id)
-                ->get();
-
-            foreach ($produto->aplicacoes as $aplicacao) {
-                $aplicacao->modelos = DB::table('aplicacao_modelo')
-                    ->select('modelo.nome')
-                    ->join('modelo', 'modelo.id', '=', 'aplicacao_modelo.modelo_id', 'inner')
-                    ->where('aplicacao_modelo.aplicacao_id', '=', $aplicacao->id)
-                    ->get();
-
-
-                $aplicacao->motores = DB::table('aplicacao_motor')
-                    ->select('motor.nome')
-                    ->join('motor', 'motor.id', '=', 'aplicacao_motor.motor_id')
-                    ->where('aplicacao_motor.aplicacao_id', '=', $aplicacao->id)
-                    ->get();
-            }
-
-            dd($produto);
+                        ->select(
+                            DB::raw("modelo.nome as modelo"),
+                            DB::raw("posicao.nome as posicao"),
+                            DB::raw("group_concat(distinct motor.nome order by motor.nome asc separator ', ') as motor"),
+                            DB::raw("nvl(aplicacao.ano_inicial, '-') as ano_inicial"),
+                            DB::raw("nvl(aplicacao.ano_final, '-') as ano_final"),
+                            DB::raw("aplicacao.observacao as observacao"))
+                        ->join('aplicacao_modelo', 'aplicacao_modelo.aplicacao_id', '=', 'aplicacao.id')
+                        ->join('modelo', 'aplicacao_modelo.modelo_id', '=', 'modelo.id')
+                        ->join('aplicacao_motor', 'aplicacao_motor.aplicacao_id', '=', 'aplicacao.id')
+                        ->join('motor', 'aplicacao_motor.motor_id', '=', 'motor.id')
+                        ->join('posicao', 'posicao.id', '=', 'aplicacao.posicao_id')
+                        ->where('aplicacao.produto_id', '=', $produto->id)
+                        ->groupBy('modelo.nome', 'posicao.nome', 'aplicacao.ano_inicial', 
+                                   'aplicacao.ano_final', 'aplicacao.observacao')
+                        ->orderBy('modelo.nome', 'asc')
+                        ->orderBy('posicao.nome', 'asc')
+                        ->get();
         }
+
+        #dd($produtos);
+
+        return view('pesquisar', [
+            'produtos' => $produtos,
+            'grupos' => $grupos,
+            'motores' => $motores,
+            'posicoes' => $posicoes,
+            'modelos' => $modelos,
+        ]);
     }
 }

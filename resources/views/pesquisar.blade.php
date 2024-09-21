@@ -52,9 +52,48 @@
             </select>
         </div>
 
-        <button type="submit">Salvar</button>
+        <button type="submit">Pesquisar</button>
     </form>
 </div>
+@foreach ($produtos as $produto)
+<div class="container">
+    <table>
+        <tr>
+            <th>Referencia</th>
+            <th>Nome</th>
+            <th>Qtd. Carro</th>
+            <th>Multiplo</th>
+            <th>Observacao</th>
+        </tr>
+        <tr>
+            <td>{{ $produto->referencia }}</td>
+            <td>{{ $produto->nome }}</td>
+            <td>{{ $produto->quant_carro }}</td>
+            <td>{{ $produto->multiplo }}</td>
+            <td>{{ $produto->observacao }}</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>Modelo</th>
+            <th>Motor</th>
+            <th>Ano</th>
+            <th>Posicao</th>
+            <th>Observação</th>
+        </tr>
+        @foreach ($produto->aplicacoes as $aplicacao)
+        <tr>
+            <td>{{ $aplicacao->modelo }}</td>
+            <td>{{ $aplicacao->motor }}</td>
+            <td>{{ $aplicacao->ano_inicial }} Até {{ $aplicacao->ano_final }}</td>
+            <td>{{ $aplicacao->posicao }}</td>
+            <td>{{ $aplicacao->observacao }}</td>
+        </tr>
+        @endforeach
+    </table>
+    <h6>Caso ha alguma divergencia abrir uma task com prints</h6>
+</div>
+@endforeach
 <script>
     $('.js-example-basic-single1').select2({
         placeholder: "Selecione o modelo"
