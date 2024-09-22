@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Motor;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Validator;
 
 class MotorController extends Controller
 {
@@ -25,6 +27,16 @@ class MotorController extends Controller
 
     public function store(Request $request){
         $motor = New Motor();
+
+        $validator = Validator::make($request->all(), [
+            'nome' => 'required|integer',
+        ],[
+            'nome.required' => "O nome deve ser preenchido",
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }        
 
         $motor->nome = $request->input('nome');
         $motor->save();

@@ -70,36 +70,14 @@
     @foreach($aplicacoes as $aplicacao)
     <table>
         <tr>
-            <td>
-                @foreach($aplicacao->modelos as $modelos)
-                {{ $modelos->nome }}
-                <br>
-                @endforeach
-            </td>
-            <td>
-                @foreach($aplicacao->motores as $motores)
-                {{ $motores->nome }}
-                <br>
-                @endforeach
-            </td>
-            <td>{{ $aplicacao->posicao->nome }}</td>
-            <td>
-                @if($aplicacao->ano_inicial <> null)
-                    {{ $aplicacao->ano_inicial }} 
-                @else
-                    -
-                @endif
-                á 
-                @if($aplicacao->ano_final <> null)
-                    {{ $aplicacao->ano_final }}
-                @else
-                    -
-                @endif
-            </td>
+            <td>{{ $aplicacao->modelo }}</td>
+            <td>{{ $aplicacao->motor }}</td>
+            <td>{{ $aplicacao->posicao }}</td>
+            <td>{{ $aplicacao->ano_inicial }} Até {{ $aplicacao->ano_final }}</td>
             <td>{{ $aplicacao->observacao }}</td>
         </tr>
     </table>
-    @if($aplicacao->produto_id <> null)<hr>@endif
+    @if($aplicacao->modelo <> null)<hr>@endif
     @endforeach
 </div>
 @endif
