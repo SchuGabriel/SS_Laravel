@@ -8,9 +8,6 @@
         <tr>
             <th>Referencia</th>
             <th>Nome</th>
-            <th>Observacao</th>
-            <th>Qtd Carro</th>
-            <th>Multiplo</th>
             <th>Cod_similar</th>
             <th>Ações</th>
         </tr>
@@ -18,9 +15,6 @@
         <tr>
             <td>{{ $produto->referencia }}</td>
             <td>{{ $produto->nome }}</td>
-            <td>{{ $produto->observacao }}</td>
-            <td>{{ $produto->quant_carro }}</td>
-            <td>{{ $produto->multiplo }}</td>
             <td>
                 @if($produto->cod_similar->isEmpty())
                 N/A

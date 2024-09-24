@@ -3,9 +3,6 @@
 @section("style")
 <link rel="stylesheet" href="{{ asset('asset/css/default.css') }}" type="text/css" />
 @endsection
-@section("voltar")
-<li><a href="{{ asset('/') }}" class="lista">Voltar</a></li>
-@endsection
 @section("content")
 <div class="container">
     <h1>Cadastro</h1>

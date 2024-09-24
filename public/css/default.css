@@ -34,7 +34,7 @@ a:hover {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .colunas li {
@@ -67,9 +67,22 @@ h1 {
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     text-align: center;
-    max-width: 85%;
-    width: calc(100% - 40px);
-    margin: 80px auto 80px;
+    width: 90%;
+    max-width: 1200px;
+    min-width: 300px;
+    margin: 80px auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 70%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 50%;
+    }
 }
 
 .link-list {
@@ -111,6 +124,7 @@ h1 {
 
 table {
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     margin: 20px auto;
     background-color: #333;
@@ -122,6 +136,7 @@ td {
     border: 1px solid #555;
     padding: 12px;
     text-align: center;
+    word-wrap: break-word;
 }
 
 th {
@@ -166,7 +181,7 @@ label {
 }
 
 input[type="text"] {
-    width: calc(100% - 20px);
+    width: calc(100% - 50px);
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #555;
@@ -192,4 +207,52 @@ button:hover {
 
 img {
     max-height: 100px;
+}
+
+.container-qtd_mult {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+}
+
+.container-qtd_mult .input {
+    flex-basis: calc(50% - 5px);
+    margin: 5px 0;
+}
+
+@media (min-width: 1200px) {
+    .container-qtd_mult .input {
+        flex-basis: calc(45% - 5px);
+    }
+}
+
+.container-ref-nome {
+    display: flex;
+    justify-content: space-around;
+}
+
+.container-ref-nome .input:first-child {
+    flex: 1 1 30%;
+}
+
+.container-ref-nome .input:last-child {
+    flex: 1 1 70%;
+}
+
+.master-container{
+    display: block;
+}
+
+.label_input{
+    display: flex;
+}
+
+.label_input label{
+    margin-right: 10px;
+}
+
+textarea{
+    background-color: #242424;
+    color: #fff;
 }
