@@ -7,6 +7,8 @@ use App\Models\Grupo;
 use App\Models\Grupo_Produto;
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
 
 class ProdutoController extends Controller
 {
@@ -36,6 +38,17 @@ class ProdutoController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nome' => 'required',
+        ], [
+            'nome.required' => "O nome deve ser preenchido."
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        dd($validator);
         // Criação do Produto
         $produto = new Produto();
         $produto->referencia = $request->input('referencia');
