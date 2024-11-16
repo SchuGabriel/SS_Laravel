@@ -34,8 +34,14 @@ class PesquisarController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    public function search(Request $request, $filters)
     {
+
+        dd($request);
+
+        if (!empty($filters)){
+            $request->merge($filters);
+        }
 
         $modelos = Modelo::all();
         $grupos = Grupo::all();

@@ -110,7 +110,7 @@ Route::prefix('conferencia')->group(function() {
 Route::prefix('ia')->group(function() {
 
     Route::get('/', [IAController::class, 'index'])->name('home.ia');
-    Route::get('/chatgpt', [ChatGptController::class, 'getResponse'])->name('chat.send');
+    Route::post('/chatgpt', [ChatGptController::class, 'getresponse'])->name('chat.send');
 
 });
 

@@ -1,0 +1,267 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: #242424;
+    color: rgba(255, 255, 255, 0.87);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+}
+
+a:hover {
+    color: #535bf2;
+}
+
+.cabecalho {
+    background-color: #242424;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 2px solid #535bf2;
+}
+
+.colunas {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.colunas li {
+    margin: 0 15px;
+}
+
+.colunas a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+    padding: 5px 10px;
+}
+
+.colunas a:hover {
+    border-bottom: 2px solid #fff;
+    color: #fff;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    min-width: 300px;
+    margin: 80px auto;
+}
+
+.link-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.link-list li {
+    margin: 10px 0;
+    position: relative;
+}
+
+.link-list a {
+    text-decoration: none;
+    color: #646cff;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.link-list a:hover {
+    color: #fff;
+    background-color: #575bf2;
+    text-decoration: none;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    margin-top: auto;
+    border-top: 1px solid #575bf2;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #333;
+    max-width: 85%;
+}
+
+th,
+td {
+    border: 1px solid #555;
+    padding: 12px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+th {
+    background-color: #444;
+    color: #fff;
+    font-weight: bold;
+}
+
+td {
+    background-color: #222;
+}
+
+a,
+button {
+    color: #646cff;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a:hover,
+button:hover {
+    color: #fff;
+    background-color: #575bf2;
+}
+
+form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: calc(100% - 50px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+}
+
+button {
+    background-color: #646cff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background-color: #575bf2;
+}
+
+img {
+    max-height: 100px;
+}
+
+.container-qtd_mult {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+}
+
+.container-qtd_mult .input {
+    flex-basis: calc(50% - 5px);
+    margin: 5px 0;
+}
+
+@media (min-width: 1200px) {
+    .container-qtd_mult .input {
+        flex-basis: calc(45% - 5px);
+    }
+}
+
+.container-ref-nome {
+    display: flex;
+    justify-content: space-around;
+}
+
+.container-ref-nome .input:first-child {
+    flex: 1 1 30%;
+}
+
+.container-ref-nome .input:last-child {
+    flex: 1 1 70%;
+}
+
+.master-container{
+    display: block;
+}
+
+.label_input{
+    display: flex;
+}
+
+.label_input label{
+    margin-right: 10px;
+}
+
+textarea{
+    background-color: #242424;
+    color: #fff;
+}
+
+.filtro{
+    display: flex;
+}
+
+.filtro_container{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+}
+
+.filtro_container .input {
+    flex-basis: calc(50% - 5px);
+    margin: 5px 0;
+}
+
+#referencia{
+    margin-left: 10px;
+    width: calc(100% - 70%);
+}
