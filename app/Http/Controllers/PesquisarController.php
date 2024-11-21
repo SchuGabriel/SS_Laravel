@@ -34,15 +34,8 @@ class PesquisarController extends Controller
         ]);
     }
 
-    public function search(Request $request, $filters)
+    public function search(Request $request)
     {
-
-        dd($request);
-
-        if (!empty($filters)){
-            $request->merge($filters);
-        }
-
         $modelos = Modelo::all();
         $grupos = Grupo::all();
         $motores = Motor::all();
@@ -141,7 +134,7 @@ class PesquisarController extends Controller
                         ->get();
         }
 
-        #dd($produtos);
+        #"dd($produtos);
 
         return view('pesquisar', [
             'produtos' => $produtos,
